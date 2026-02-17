@@ -23,7 +23,7 @@
           
           <div class="flex gap-5 items-center pl-6">
             <li><a href="#products"><img src="media/icons8-women's-watch-30.png"></a></li>
-            <li><a href="#products"><img src="media/icons8-person-30.png"></a></li>
+            <li><a href="signup.php"><img src="media/icons8-person-30.png"></a></li>
           </div>
         </ul>
 
@@ -57,7 +57,7 @@
             <p class="text-[40px] font-normal">JOIN THE COLLECTORS CLUB TO PURCHASE</p>
         </div>
 
-        <button class="mt-[400px] mx-auto bg-white text-black px-8 py-5">SIGN UP</button>
+        <a href="signup.php"><button class="mt-[400px] mx-auto bg-white text-black px-8 py-5">SIGN UP</button></a>
     </div>
 
 
@@ -67,7 +67,7 @@
 <div id="products" class="max-w-7xl mx-auto py-20 pb-28 px-4">
 
     <h2 class="text-3xl font-bold mb-5 text-center text-white">Our Collection</h2>
-    <h3 class="text-2xl font-regular mb-20 text-center text-[#BFB578]">Explore our finest timepieces</h2>
+    <h3 class="text-2xl font-regular mb-20 text-center text-[#BFB578]">Explore our finest timepieces</h3>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
     </div>
