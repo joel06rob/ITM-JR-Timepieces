@@ -1,7 +1,7 @@
 <?php
 //----------TESTING CLASS-----------
 
-class test {
+class Test {
     public $name;
     public $color;
 

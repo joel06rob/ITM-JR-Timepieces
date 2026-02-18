@@ -74,7 +74,36 @@
     <h2 class="text-3xl font-bold mb-5 text-center text-white">Our Collection</h2>
     <h3 class="text-2xl font-regular mb-20 text-center text-[#BFB578]">Explore our finest timepieces</h3>
 
+    <!--PRODUCTS GRID-->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+
+    <?php
+        //Connect to database
+        //Select all products
+        //TODO: Add Sorting
+        $db = new Database();
+        $conn = $db->connect();
+        $sql = "SELECT * FROM Product";
+        $product_results = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($product_results) > 0){
+            while ($row = mysqli_fetch_assoc($product_results)) {
+             echo '
+                <div class="relative group bg-white shadow rounded-xl p-5 text-center">
+                <div class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover:block w-max bg-black text-white text-xs rounded px-2 py-1">
+                '. $row['Description'] .'
+                </div>
+                <img src="media/' . $row['ImageUrl'] . '" alt="'.$row['Name'].'" class="w-full h-40 object-cover rounded-lg mb-4">
+
+                <h5 class="text-xl font-semibold mb-1">'. $row['Name'] .'</h5>
+                <p class="text-gray-500 mb-4">£'. $row['Price'] .'</p> ';
+            }   
+        }
+        else{
+            echo '<p>No results found.</p>';
+        }
+    ?>
+
     </div>
     <div class="flex justify-center">
         <button class="justify-center bg-white text-black px-8 py-5">FIND WATCH</button>
