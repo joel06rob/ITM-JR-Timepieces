@@ -1,3 +1,8 @@
+<?php
+    //Autoloader test
+    require_once "autoloader.php";
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

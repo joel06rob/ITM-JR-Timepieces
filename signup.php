@@ -22,6 +22,12 @@
               <h2 class="my-4">SIGN UP</h2>
                 <form action="signup.php" method="post" class="flex flex-col gap-3">
                   <div>
+                    <input type="text" name="fname" placeholder="First Name:">
+                  </div>
+                  <div>
+                    <input type="text" name="sname" placeholder="Surname:">
+                  </div>
+                  <div>
                     <input type="email" name="email" placeholder="Email:">
                   </div>
                   <div>
