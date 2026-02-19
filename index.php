@@ -86,26 +86,51 @@
         $sql = "SELECT * FROM Product";
         $product_results = mysqli_query($conn, $sql);
 
-        if (mysqli_num_rows($product_results) > 0){
+        if (mysqli_num_rows($product_results) > 0) {
             while ($row = mysqli_fetch_assoc($product_results)) {
              echo '
                 <div class="relative group bg-white shadow rounded-xl p-5 text-center">
                 <div class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover:block w-max bg-black text-white text-xs rounded px-2 py-1">
                 '. $row['Description'] .'
                 </div>
-                <img src="media/' . $row['ImageUrl'] . '" alt="'.$row['Name'].'" class="w-full h-40 object-cover rounded-lg mb-4">
+                <img 
+                    src="media/' . $row['ImageUrl'] . '" 
+                    alt="'.$row['Name'].'"
+                    class="w-full h-40 object-cover rounded-lg mb-4"
+                >
 
                 <h5 class="text-xl font-semibold mb-1">'. $row['Name'] .'</h5>
                 <p class="text-gray-500 mb-4">£'. $row['Price'] .'</p> ';
-            }   
-        }
-        else{
-            echo '<p>No results found.</p>';
+
+                //Check if item is in stock, if so display add to cart button else tell the user they are out of stock.
+                if($row['Stock'] > 0){
+                    echo '
+                    
+                    <a href="cart.php?id=' . $row['ID'] .'" 
+                        class="inline-block bg-none text-[#BFB578] font-semibold px-4 py-2 rounded-lg hover:text-[#161616] transition">
+                        Add to Cart
+                    </a>
+                    ';
+                } 
+                else{
+
+                    echo '
+                        <p class="text-red-500 font-semibold">Out of stock</p>
+                    ';
+                
+                }
+                
+                echo '</div>';
+            }
+
+        } else {
+            echo "No records found.";
         }
     ?>
 
     </div>
-    <div class="flex justify-center">
+    <div class="flex justify-center mt-10">
+        <!--TODO: Create Watch Finder Search -->
         <button class="justify-center bg-white text-black px-8 py-5">FIND WATCH</button>
     </div>
 </div>
