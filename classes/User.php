@@ -29,7 +29,15 @@ class User {
         }
         else{
             mysqli_stmt_bind_param($stmt, "ssssss", $fname, $sname, $email, $hashed_password, $usertype, $created);
-            mysqli_stmt_execute($stmt);
+
+        //TODO: Add a return value to notify user of successful user signup.
+            $execute_result = mysqli_stmt_execute($stmt);
+            if(!$execute_result){
+                return false;
+            }
+            else{
+                return true;
+            }
         }
     }
 

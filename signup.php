@@ -9,14 +9,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   $sname = $_POST['sname'] ?? '';
   $email = $_POST['email'] ?? '';
   $password = $_POST['password'] ?? '';
+  $passwordre = $_POST['repeat_password'] ?? '';
+  
+  //Validation: Signup
+  //Passwords, Names, Email
+  $signup_errors = [];
+  if(!($password == $passwordre)){
+    $signup_errors[] = "<p class='text-red-600'>Please ensure your password matches the re-entered password.</p>";
+  }
+  if(preg_match('/\d/', $fname) || preg_match('/\d/', $sname)){
+    $signup_errors[] = "<p class='text-red-600'>Please enter a valid name.</p>";
+  }
+  if(!preg_match('/^[^\s@]+@[^\s@]+\.[^\s@]+$/', $email)){
+    $signup_errors[] = "<p class='text-red-600'>Please enter a valid email.</p>";
+  }
 
-  //TODO: Add validation
+  //TODO: Auth() - Validate if email already exists.
 
+  if(!$signup_errors){
   $db = new Database();
   $conn = $db->connect();
 
   $user_signup = new User($conn);
-  $user_signup->createUser($fname, $sname, $email, $password);
+  $result_signup = $user_signup->createUser($fname, $sname, $email, $password);
+  if($result_signup){
+    //TODO: On redirect, pass temporary cookie into login page - Auto login.
+    echo "<p class='text-green-500'>Successfully Signed Up</p>";
+  }
+  else{
+    echo "<p class='text-red-600'>Error Signing Up: Please Try Again</p>";
+  }
+  }
 }
 ?>
 
@@ -38,26 +61,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline><source src="media/204581-925146029_small.mp4"/></video>
     <div class="relative z-10 w-full max-w-md">
         <div class="bg-white px-10 pb-36 pt-8 shadow-xl">
+          
+          <?php
+            if(isset($signup_errors) && $signup_errors){
+              echo "<div class='flex flex-col bg-red-300 px-2 rounded-lg'>";
+              foreach($signup_errors as $error){
+                echo $error;
+              }
+              echo "</div>";
+            }
+          ?>
+
             <div>
               <h2 class="my-4">SIGN UP</h2>
                 <form action="signup.php" method="post" class="flex flex-col gap-3">
                   <div>
-                    <input type="text" name="fname" placeholder="First Name:">
+                    <input type="text" name="fname" placeholder="First Name:" required>
                   </div>
                   <div>
-                    <input type="text" name="sname" placeholder="Surname:">
+                    <input type="text" name="sname" placeholder="Surname:" required>
                   </div>
                   <div>
-                    <input type="email" name="email" placeholder="Email:">
+                    <input type="email" name="email" placeholder="Email:" required>
                   </div>
                   <div>
-                    <input type="password" name="password" placeholder="Password:">
+                    <input type="password" name="password" placeholder="Password:" required>
                   </div>
-                  <!--
                   <div>
                     <input type="password" name="repeat_password" placeholder="Repeat Password:">
                   </div>
-                  -->
                   <!--Add optional address here-->
                   <div>
                     <input type="submit" value="SIGN UP" name="submit" class="bg-[#2D2D2D] text-white py-3 px-5">
