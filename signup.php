@@ -1,4 +1,24 @@
-<!--PHP CODE TO QUERY USER ACCOUNT > REDIRECT TO LOGIN -->
+<!--TODO: PHP CODE TO QUERY USER ACCOUNT > REDIRECT TO LOGIN -->
+<?php
+require_once "autoloader.php";
+
+//User Signup (TEST)
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+  $fname = $_POST['fname'] ?? '';
+  $sname = $_POST['sname'] ?? '';
+  $email = $_POST['email'] ?? '';
+  $password = $_POST['password'] ?? '';
+
+  //TODO: Add validation
+
+  $db = new Database();
+  $conn = $db->connect();
+
+  $user_signup = new User($conn);
+  $user_signup->createUser($fname, $sname, $email, $password);
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -33,9 +53,11 @@
                   <div>
                     <input type="password" name="password" placeholder="Password:">
                   </div>
+                  <!--
                   <div>
                     <input type="password" name="repeat_password" placeholder="Repeat Password:">
                   </div>
+                  -->
                   <!--Add optional address here-->
                   <div>
                     <input type="submit" value="SIGN UP" name="submit" class="bg-[#2D2D2D] text-white py-3 px-5">
@@ -44,7 +66,6 @@
             </div>
             <p class="mt-10">Already a member with us? <a href="login.php">Log In</a></p>
         </div>
-            
     </div>
 
 

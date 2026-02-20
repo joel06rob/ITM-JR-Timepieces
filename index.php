@@ -89,7 +89,7 @@
         if (mysqli_num_rows($product_results) > 0) {
             while ($row = mysqli_fetch_assoc($product_results)) {
              echo '
-                <div class="relative group bg-white shadow rounded-xl p-5 text-center">
+                <div class="relative group bg-white shadow p-5 text-center">
                 <div class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover:block w-max bg-black text-white text-xs rounded px-2 py-1">
                 '. $row['Description'] .'
                 </div>
@@ -126,6 +126,9 @@
         } else {
             echo "No records found.";
         }
+
+        //Close sql connection
+        mysqli_close($conn);
     ?>
 
     </div>
