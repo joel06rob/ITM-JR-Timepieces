@@ -1,3 +1,15 @@
+<?php
+require_once "init.php";
+
+  //User isn't admin - Redirect
+  if (!$auth->checkAdmin()){
+  header("Location: index.php");
+  exit;
+  }
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>

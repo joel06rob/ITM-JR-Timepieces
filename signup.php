@@ -1,6 +1,13 @@
-<!--TODO: PHP CODE TO QUERY USER ACCOUNT > REDIRECT TO LOGIN -->
 <?php
-require_once "autoloader.php";
+
+require_once "init.php";
+
+//User Already Logged In - Redirect
+if ($auth->checkUser()){
+  header("Location: index.php");
+  exit;
+}
+
 
 //User Signup (TEST)
 if($_SERVER["REQUEST_METHOD"] == "POST"){

@@ -48,9 +48,11 @@
         public function checkUser(){
             return isset($_SESSION['user_id']);
         }
-        
+
         public function checkAdmin(){
-            
+            if(isset($_SESSION['user_type']) && $_SESSION['user_type'] === "Admin"){
+                return true;
+            }
         }
 
 
