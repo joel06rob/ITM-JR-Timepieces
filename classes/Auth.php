@@ -42,10 +42,13 @@
             
         }
 
-        public function checkUser(){
-            
-        }
 
+        //Check User:
+        //Check that the user session variable for user id has a value - Used in various pages to check if the user is logged in.
+        public function checkUser(){
+            return isset($_SESSION['user_id']);
+        }
+        
         public function checkAdmin(){
             
         }

@@ -61,7 +61,7 @@
             <p class="text-[128px] italic font-bold">MEMBERS CLUB</p>
             <p class="text-[40px] font-normal">JOIN THE COLLECTORS CLUB TO PURCHASE</p>
         </div>
-
+        <!--TODO: Change from Sign Up to view User Profile when logged in. -->
         <a href="signup.php"><button class="mt-[400px] mx-auto bg-white text-black px-8 py-5">SIGN UP</button></a>
     </div>
 

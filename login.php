@@ -1,9 +1,14 @@
 <?php
-//TODO: First check if the user is logged in (Redirect if so) - Also at top of php need to initialise session with Session_Start().
 
-require_once "autoloader.php";
+require_once "init.php";
 
-//User Login (TEST)
+//User Already Logged In - Redirect
+if ($auth->checkUser()){
+  header("Location: index.php");
+  exit;
+}
+
+//User Login
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
   $email = $_POST['email'] ?? '';
@@ -11,28 +16,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
   $login_errors = [];
 
-  //TODO: Validation: Login
-
-  $db = new Database();
-  $conn = $db->connect();
-
-  $user_login = new Auth($conn);
-  $result_login = $user_login->loginUser($email, $password);
+  //Validation: Login
+  if(!preg_match('/^[^\s@]+@[^\s@]+\.[^\s@]+$/', $email)){
+    $signup_errors[] = "<p class='text-red-600'>Please enter a valid email.</p>";
+  }
+  
+  if(!$login_errors){
+  $result_login = $auth->loginUser($email, $password);
 
   if($result_login){
-    echo "<p class='text-green-500'>Successfully logged in</p>";
-    echo $_SESSION['user_id'];
-    echo $_SESSION['user_email'];
-    echo $_SESSION['user_fname'];
-    echo $_SESSION['user_type'];
-
+    header("Location: index.php");
+    exit;
   }
   else{
     $login_errors [] = "<p class='text-red-500'>Error Logging In: Ensure account details are correct.</p>";
   }
 
 
-
+  }
 }
 
 ?>
@@ -55,7 +56,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <section class="relative h-screen overflow-hidden flex items-center justify-center">
     <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline><source src="media/204581-925146029_small.mp4"/></video>
     <div class="relative z-10 w-full max-w-md">
-        <div class="bg-white px-10 pb-44 pt-8 shadow-xl">
+        <div class="bg-white px-10 pb-24 pt-8 shadow-xl">
 
           <?php
             if(isset($login_errors) && $login_errors){
