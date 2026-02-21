@@ -1,3 +1,43 @@
+<?php
+//TODO: First check if the user is logged in (Redirect if so) - Also at top of php need to initialise session with Session_Start().
+
+require_once "autoloader.php";
+
+//User Login (TEST)
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+  $email = $_POST['email'] ?? '';
+  $password = $_POST['password'] ?? '';
+
+  $login_errors = [];
+
+  //TODO: Validation: Login
+
+  $db = new Database();
+  $conn = $db->connect();
+
+  $user_login = new Auth($conn);
+  $result_login = $user_login->loginUser($email, $password);
+
+  if($result_login){
+    echo "<p class='text-green-500'>Successfully logged in</p>";
+    echo $_SESSION['user_id'];
+    echo $_SESSION['user_email'];
+    echo $_SESSION['user_fname'];
+    echo $_SESSION['user_type'];
+
+  }
+  else{
+    $login_errors [] = "<p class='text-red-500'>Error Logging In: Ensure account details are correct.</p>";
+  }
+
+
+
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +56,17 @@
     <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline><source src="media/204581-925146029_small.mp4"/></video>
     <div class="relative z-10 w-full max-w-md">
         <div class="bg-white px-10 pb-44 pt-8 shadow-xl">
+
+          <?php
+            if(isset($login_errors) && $login_errors){
+              echo "<div class='flex flex-col bg-red-300 px-2 rounded-lg'>";
+              foreach($login_errors as $error){
+                echo $error;
+              }
+              echo "</div>";
+            }
+          ?>
+
             <div>
               <h2 class="my-4">LOG IN</h2>
                 <form action="login.php" method="post" class="flex flex-col gap-3">

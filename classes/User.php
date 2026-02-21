@@ -41,6 +41,30 @@ class User {
         }
     }
 
+
+    //Method to get Users by email
+    public function getUsersByEmail($useremail){
+            
+        $sql = "SELECT ID, Fname, Sname, Password, UserType FROM User WHERE Email=?";
+
+        $stmt = mysqli_stmt_init($this->conn);
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            echo "ERROR: SQL STMT FAILED";
+        }
+        else{
+            mysqli_stmt_bind_param($stmt, "s", $useremail);
+        }
+        mysqli_stmt_execute($stmt);
+        $users_result = mysqli_stmt_get_result($stmt);
+
+        if($row = mysqli_fetch_assoc($users_result)){
+            return $row;
+        }
+
+        return false;
+
+    }
+
 }
 
 ?>
