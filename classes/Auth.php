@@ -55,6 +55,10 @@
             }
         }
 
+        public function registerUser(){
+            
+        }
+
 
     }
 

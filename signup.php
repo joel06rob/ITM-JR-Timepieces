@@ -1,5 +1,5 @@
 <?php
-
+//TODO: Create a registerUser() method in Auth - Clean up code
 require_once "init.php";
 
 //User Already Logged In - Redirect
@@ -45,10 +45,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     if(!$signup_errors){
       $result_signup = $user_signup->createUser($fname, $sname, $email, $password);
+      
       if($result_signup){
-        //TODO: On redirect, pass temporary cookie into login page - Auto login.
-        echo "<p class='text-green-500'>Successfully Signed Up</p>";
+        //Auto login to created account - TODO: Tidy up later with registerUser()
+        $auth->loginUser($email, $password);
+        header("Location: index.php");
+        exit;
       }
+
       else{
         $signup_errors[] = "<p class='text-red-600'>Error Signing Up: Please Try Again</p>";
       }
