@@ -31,21 +31,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $signup_errors[] = "<p class='text-red-600'>Please enter a valid email.</p>";
   }
 
-  //TODO: Auth() - Validate if email already exists.
-
   if(!$signup_errors){
-  $db = new Database();
-  $conn = $db->connect();
+    $db = new Database();
+    $conn = $db->connect();
+    $user_signup = new User($conn);
 
-  $user_signup = new User($conn);
-  $result_signup = $user_signup->createUser($fname, $sname, $email, $password);
-  if($result_signup){
-    //TODO: On redirect, pass temporary cookie into login page - Auto login.
-    echo "<p class='text-green-500'>Successfully Signed Up</p>";
-  }
-  else{
-    echo "<p class='text-red-600'>Error Signing Up: Please Try Again</p>";
-  }
+    //Check if email exists
+    //If email exists then error. Else create the new user.
+    $email_exists = $user_signup->getUsersByEmail($email);
+    if($email_exists){
+      $signup_errors[] = "<p class='text-red-600'>Account already exists with this email, please try another.</p>";
+    }
+
+    if(!$signup_errors){
+      $result_signup = $user_signup->createUser($fname, $sname, $email, $password);
+      if($result_signup){
+        //TODO: On redirect, pass temporary cookie into login page - Auto login.
+        echo "<p class='text-green-500'>Successfully Signed Up</p>";
+      }
+      else{
+        $signup_errors[] = "<p class='text-red-600'>Error Signing Up: Please Try Again</p>";
+      }
+
+    }
+    
   }
 }
 ?>
