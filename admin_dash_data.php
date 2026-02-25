@@ -8,13 +8,15 @@ if (!$auth->checkAdmin()){
   exit;
 }
 
-$test = new Test($conn);
-$totalUsers = $test->testCountAllUsers();
+$orders = new Order($conn);
+$totalOrders = $orders->countAllOrders();
+$unprocessedOrders = $orders->countUnprocessedOrders();
 
 
 //Assoc array for JSON
 $data = [
-    "totalUsers" => $totalUsers
+    "totalOrders" => $totalOrders,
+    "totalUnprocessedOrders" => $unprocessedOrders
 ];
 
 //JSON response

@@ -5,5 +5,6 @@ fetch('admin_dash_data.php')
     .then(data =>{
 
         console.log(data);
-        document.getElementById("totalUsers").innerText = data.totalUsers;
+        document.getElementById("totalOrders").innerText = data.totalOrders;
+        document.getElementById("totalUnprocessedOrders").innerText = data.totalUnprocessedOrders;
     });

@@ -59,11 +59,11 @@
       <h3 class="text-center text-xl font-bold text-white m-10">Orders</h3>
       <div class="flex flex-col gap-10">
         <div class="text-center p-12 bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px]">
-          <p id="totalUsers" class="text-white"></p>
-          <p class="text-lg text-white">Total Users</p>
+          <p id="totalOrders" class="text-white"></p>
+          <p class="text-lg text-white">Total Orders</p>
         </div>
-        <div id="" class="text-center p-12 bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px]">
-          <p></p>
+        <div class="text-center p-12 bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px]">
+          <p id="totalUnprocessedOrders" class="text-white"></p>
           <p class="text-lg text-white">Unprocessed Orders</p>
         </div>
       </div>
