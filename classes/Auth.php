@@ -39,7 +39,7 @@
         }
 
         public function logoutUser(){
-            
+            session_destroy();
         }
 
 
