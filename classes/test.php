@@ -2,16 +2,17 @@
 //----------TESTING CLASS-----------
 
 class Test {
-    public $name;
-    public $color;
+    private $conn;
 
-    function __construct($name, $color){
-        $this->name = $name;
-        $this->color = $color;
+    function __construct($conn){
+        $this->conn = $conn;
+        
     }
 
-    function get_details(){
-        echo "Name: " . $this->name . " Color: " . $this->color;
+    public function testCountAllUsers(){
+        $sql = "SELECT COUNT(*) AS Total FROM User";
+        $result = mysqli_query($this->conn, $sql);
+        return mysqli_fetch_assoc($result)['Total'];
     }
 }
 

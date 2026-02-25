@@ -6,6 +6,12 @@
   header("Location: index.php");
   exit;
   }
+
+  //Get data for charts - Moved to seperate endpoint (Simpler JSON data).
+  
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -43,11 +49,34 @@
 
 
 <!-- ADMIN -->
-<div id="products" class="max-w-7xl mx-auto py-20 pb-28 px-4">
+<section id="dashboard" class="max-w-7xl mx-auto py-20 pb-28 px-4">
 
-    <h2 class="text-3xl font-bold mb-5 text-center text-white">Admin Dashboard</h2>
+  <h2 class="text-3xl font-bold mb-5 text-center text-white">Admin Dashboard</h2>
 
-</div>
+  <div>
+  <!--DASHBOARD: ORDERS-->
+    <div>
+      <h3 class="text-center text-xl font-bold text-white m-10">Orders</h3>
+      <div class="flex flex-col gap-10">
+        <div class="text-center p-12 bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px]">
+          <p id="totalUsers" class="text-white"></p>
+          <p class="text-lg text-white">Total Users</p>
+        </div>
+        <div id="" class="text-center p-12 bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px]">
+          <p></p>
+          <p class="text-lg text-white">Unprocessed Orders</p>
+        </div>
+      </div>
+      <div>
+        <canvas></canvas>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</section>
 
 
 <footer class="flex text-white font-medium py-8 px-8 gap-6">
@@ -56,5 +85,6 @@
     <a href="cart.php">Your Cart</a>
 </footer>
 
+<script src="chartdata_dash.js" defer></script>
 </body>
 </html>
