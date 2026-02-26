@@ -11,12 +11,14 @@ if (!$auth->checkAdmin()){
 $orders = new Order($conn);
 $totalOrders = $orders->countAllOrders();
 $unprocessedOrders = $orders->countUnprocessedOrders();
+$totalOrdersByDate = $orders->countOrdersByDate();
 
 
 //Assoc array for JSON
 $data = [
     "totalOrders" => $totalOrders,
-    "totalUnprocessedOrders" => $unprocessedOrders
+    "totalUnprocessedOrders" => $unprocessedOrders,
+    "totalOrdersByDate" => $totalOrdersByDate
 ];
 
 //JSON response

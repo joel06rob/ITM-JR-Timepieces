@@ -20,6 +20,7 @@
     <title>Watch Shop</title>
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
@@ -55,20 +56,22 @@
 
   <div>
   <!--DASHBOARD: ORDERS-->
-    <div>
-      <h3 class="text-center text-xl font-bold text-white m-10">Orders</h3>
-      <div class="flex flex-col gap-10">
-        <div class="text-center p-12 bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px]">
-          <p id="totalOrders" class="text-white"></p>
-          <p class="text-lg text-white">Total Orders</p>
+  <h3 class="text-center text-xl font-bold text-white m-10">Orders</h3>
+    <div class="flex items-center gap-2">
+      
+      <div class="flex flex-col gap-2">
+        <div class="text-center p-12 bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px] rounded-b-none">
+          <p id="totalOrders" class="text-white text-8xl font-medium"></p>
+          <p class="text-3xl text-white">Total Orders</p>
         </div>
-        <div class="text-center p-12 bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px]">
-          <p id="totalUnprocessedOrders" class="text-white"></p>
-          <p class="text-lg text-white">Unprocessed Orders</p>
+        <div class="text-center p-12 bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px] rounded-t-none">
+          <p id="totalUnprocessedOrders" class="text-white text-8xl font-medium"></p>
+          <p class="text-3xl text-white">Unprocessed Orders</p>
         </div>
       </div>
-      <div>
-        <canvas></canvas>
+      
+      <div class="bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px] p-20">
+        <canvas id="totalOrdersByDate" class="min-w-[600px]"></canvas>
       </div>
 
     </div>
