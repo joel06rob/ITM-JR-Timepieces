@@ -30,6 +30,23 @@ class Order {
         }
         return $data;
     }
+
+    public function countTotalRevenue(){
+        $sql = "SELECT SUM(PriceAtPurchase * Quantity) AS TotalRevenue FROM Orders_Items oi JOIN Orders o ON o.ID = oi.OrderID WHERE o.Status = 'Completed'";
+        $result = mysqli_query($this->conn, $sql);
+        return mysqli_fetch_assoc($result)['TotalRevenue'];
+    }
+
+    public function countRevenueByDate(){
+        $sql = "SELECT DATE(o.OrderDate) AS RevenueDate, SUM(oi.PriceAtPurchase * oi.Quantity) AS TotalRevenue FROM Orders o JOIN Orders_Items oi ON o.ID = oi.OrderID WHERE o.Status = 'Completed' GROUP BY DATE(o.OrderDate) ORDER BY RevenueDate ASC";
+        $result = mysqli_query($this->conn, $sql);
+
+        $data= array();
+        foreach($result as $row){
+            $data[] = $row;
+        }
+        return $data;
+    }
 }
 
 

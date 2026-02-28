@@ -54,7 +54,7 @@
 
   <h2 class="text-3xl font-bold mb-5 text-center text-white">Admin Dashboard</h2>
 
-  <div>
+  <div class="flex flex-col gap-10">
   <!--DASHBOARD: ORDERS-->
   <h3 class="text-center text-xl font-bold text-white m-10">Orders</h3>
     <div class="flex items-center gap-2">
@@ -72,6 +72,27 @@
       
       <div class="bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px] p-20">
         <canvas id="totalOrdersByDate" class="min-w-[600px]"></canvas>
+      </div>
+
+    </div>
+
+    <!--DASHBOARD: REVENUE-->
+  <h3 class="text-center text-xl font-bold text-white m-10">Payments</h3>
+    <div class="flex flex-col items-center gap-2">
+      
+      <div class="flex gap-2">
+        <div class="text-center p-12 bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px]">
+          <p id="totalRevenue" class="text-white text-8xl font-medium"></p>
+          <p class="text-3xl text-white">Revenue</p>
+        </div>
+        <div class="text-center p-12 bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px]">
+          <p id="" class="text-white text-8xl font-medium"></p>
+          <p class="text-3xl text-white">Revenue(Month)</p>
+        </div>
+      </div>
+      
+      <div class="bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px] p-20">
+        <canvas id="totalRevenueByDate" class="min-w-[600px]"></canvas>
       </div>
 
     </div>

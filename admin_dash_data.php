@@ -12,13 +12,17 @@ $orders = new Order($conn);
 $totalOrders = $orders->countAllOrders();
 $unprocessedOrders = $orders->countUnprocessedOrders();
 $totalOrdersByDate = $orders->countOrdersByDate();
+$totalRevenue = $orders->countTotalRevenue();
+$totalRevenueByDate = $orders->countRevenueByDate();
 
 
 //Assoc array for JSON
 $data = [
     "totalOrders" => $totalOrders,
     "totalUnprocessedOrders" => $unprocessedOrders,
-    "totalOrdersByDate" => $totalOrdersByDate
+    "totalOrdersByDate" => $totalOrdersByDate,
+    "totalRevenue" => $totalRevenue,
+    "totalRevenueByDate" => $totalRevenueByDate
 ];
 
 //JSON response
