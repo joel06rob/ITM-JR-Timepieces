@@ -14,6 +14,8 @@ $unprocessedOrders = $orders->countUnprocessedOrders();
 $totalOrdersByDate = $orders->countOrdersByDate();
 $totalRevenue = $orders->countTotalRevenue();
 $totalRevenueByDate = $orders->countRevenueByDate();
+$mostPopular = $orders->countMostPopular();
+$unitsSold = $orders->countUnitsSold();
 
 
 //Assoc array for JSON
@@ -22,7 +24,9 @@ $data = [
     "totalUnprocessedOrders" => $unprocessedOrders,
     "totalOrdersByDate" => $totalOrdersByDate,
     "totalRevenue" => $totalRevenue,
-    "totalRevenueByDate" => $totalRevenueByDate
+    "totalRevenueByDate" => $totalRevenueByDate,
+    "mostPopular" => $mostPopular,
+    "unitsSold" => $unitsSold
 ];
 
 //JSON response

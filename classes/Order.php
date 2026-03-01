@@ -47,6 +47,23 @@ class Order {
         }
         return $data;
     }
+
+    public function countMostPopular(){
+        $sql = "SELECT p.Name, SUM(oi.Quantity) AS TotalUnitsSold FROM Orders_Items oi JOIN Product p ON p.ID = oi.ProductID JOIN Orders o ON o.ID = oi.OrderID WHERE o.Status = 'Completed' GROUP BY p.Name ORDER BY TotalUnitsSold DESC LIMIT 1";
+        $result = mysqli_query($this->conn, $sql);
+        return mysqli_fetch_assoc($result);
+    }
+
+    public function countUnitsSold(){
+        $sql = "SELECT p.Name, COALESCE(SUM(oi.Quantity), 0) AS TotalUnitsSold FROM Product p LEFT JOIN Orders_Items oi on p.ID = oi.ProductID LEFT JOIN Orders o ON o.ID = oi.OrderID AND o.Status = 'Completed' GROUP BY p.ID, p.Name ORDER BY TotalUnitsSold DESC";
+        $result = mysqli_query($this->conn, $sql);
+
+        $data= array();
+        foreach($result as $row){
+            $data[] = $row;
+        }
+        return $data;
+    }
 }
 
 
