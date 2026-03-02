@@ -14,6 +14,7 @@ $unprocessedOrders = $orders->countUnprocessedOrders();
 $totalOrdersByDate = $orders->countOrdersByDate();
 $totalRevenue = $orders->countTotalRevenue();
 $totalRevenueByDate = $orders->countRevenueByDate();
+$totalRevenue30D = $orders->countRevenueLast30Days();
 $mostPopular = $orders->countMostPopular();
 $unitsSold = $orders->countUnitsSold();
 
@@ -25,6 +26,7 @@ $data = [
     "totalOrdersByDate" => $totalOrdersByDate,
     "totalRevenue" => $totalRevenue,
     "totalRevenueByDate" => $totalRevenueByDate,
+    "totalRevenueThirty" => $totalRevenue30D,
     "mostPopular" => $mostPopular,
     "unitsSold" => $unitsSold
 ];

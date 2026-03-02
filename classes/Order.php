@@ -48,6 +48,13 @@ class Order {
         return $data;
     }
 
+    public function countRevenueLast30Days(){
+        $sql = "SELECT COALESCE(SUM(oi.PriceAtPurchase * oi.Quantity), 0) AS TotalRevenueThirty FROM Orders_Items oi JOIN Orders o ON o.ID = oi.OrderID WHERE o.Status = 'Completed' AND o.OrderDate >= DATE_SUB(NOW(), INTERVAL 30 DAY)";
+        $result = mysqli_query($this->conn, $sql);
+        return mysqli_fetch_assoc($result)['TotalRevenueThirty'];
+    }
+    
+
     public function countMostPopular(){
         $sql = "SELECT p.Name, SUM(oi.Quantity) AS TotalUnitsSold FROM Orders_Items oi JOIN Product p ON p.ID = oi.ProductID JOIN Orders o ON o.ID = oi.OrderID WHERE o.Status = 'Completed' GROUP BY p.Name ORDER BY TotalUnitsSold DESC LIMIT 1";
         $result = mysqli_query($this->conn, $sql);

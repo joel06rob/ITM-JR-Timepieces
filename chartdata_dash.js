@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function(){
             document.getElementById("totalOrders").innerText = data.totalOrders;
             document.getElementById("totalUnprocessedOrders").innerText = data.totalUnprocessedOrders;
             document.getElementById("totalRevenue").innerText = "£" + data.totalRevenue;
+            document.getElementById("totalRevenue30D").innerText = "£" + data.totalRevenueThirty;
             document.getElementById("mostPopular").innerText = data.mostPopular.Name;
             const ctx = document.getElementById("totalOrdersByDate").getContext("2d");
             const ctx2 = document.getElementById("totalRevenueByDate").getContext("2d");
@@ -52,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 }
             });
             new Chart(ctx3, {
-                type: 'pie',
+                type: 'doughnut',
                 data: {
                     labels: PRODUCTS_LABELS,
                     datasets: [{
@@ -67,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function(){
                         '#6c46c7',
                         '#2c0d75'
                          ],
-                        borderColor: '#161616',
+                        borderColor: 'rgba(255,255,255,0)',
                     }]
                 }
             });
