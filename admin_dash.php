@@ -8,9 +8,6 @@
   }
 
   //Get data for charts - Moved to seperate endpoint (Simpler JSON data).
-  
-
-
 
 ?>
 

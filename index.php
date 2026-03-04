@@ -97,8 +97,6 @@
         //Connect to database
         //Select all products
         //TODO: Add Sorting
-        $db = new Database();
-        $conn = $db->connect();
         $sql = "SELECT * FROM Product";
         $product_results = mysqli_query($conn, $sql);
 
