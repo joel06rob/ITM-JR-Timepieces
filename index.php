@@ -103,14 +103,14 @@
         if (mysqli_num_rows($product_results) > 0) {
             while ($row = mysqli_fetch_assoc($product_results)) {
              echo '
-                <div class="relative group bg-white shadow p-5 text-center">
+                <div class="relative group bg-white shadow p-5 text-center transition-transform duration-300 ease-in-out shadow-[0_1px_5px_rgba(0,0,0,0.25)]">
                 <div class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover:block w-max bg-black text-white text-xs rounded px-2 py-1">
                 '. $row['Description'] .'
                 </div>
                 <img 
                     src="media/' . $row['ImageUrl'] . '" 
                     alt="'.$row['Name'].'"
-                    class="w-full h-40 object-cover rounded-lg mb-4"
+                    class="w-full h-40 object-cover rounded-lg mb-4 transition-transform duration-300 ease-in-out group-hover:scale-110"
                 >
 
                 <h5 class="text-xl font-semibold mb-1">'. $row['Name'] .'</h5>
@@ -119,11 +119,13 @@
                 //Check if item is in stock, if so display add to cart button else tell the user they are out of stock.
                 if($row['Stock'] > 0){
                     echo '
-                    
-                    <a href="cart.php?id=' . $row['ID'] .'" 
+                    <form method="POST" action="add_to_basket.php">
+                        <input type="hidden" name="product_id" value="'.$row["ID"].'">
+                        <button type="submit"
                         class="inline-block bg-none text-[#BFB578] font-semibold px-4 py-2 rounded-lg hover:text-[#161616] transition">
                         Add to Cart
-                    </a>
+                        </button>
+                    </form>
                     ';
                 } 
                 else{

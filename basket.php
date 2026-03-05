@@ -1,3 +1,10 @@
+<?php
+require_once "init.php";
+echo "<pre>";
+print_r($_SESSION['cart']);
+echo "</pre>";
+?>
+
 <!DOCTYPE html>
 <html class="bg-[#161616]">
 <head>

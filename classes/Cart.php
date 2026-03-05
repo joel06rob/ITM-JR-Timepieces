@@ -7,8 +7,8 @@ class Cart{
     }
 
     public function addToCart($productId, $quantity = 1){
-        if(!isset($_SESSION['cart.php'])){
-            $_SESSION['cart'];
+        if(!isset($_SESSION['cart'])){
+            $_SESSION['cart'] = [];
         }
 
         //Check if the item has been added already, if so increment the current quantity, else add it.
