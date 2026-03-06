@@ -46,8 +46,8 @@ if(!$cart->getCart()){
 
             $ordertotal += $subtotal;
             
-             echo "
-                    <div class='flex items-center justify-between gap-4 p-4 border rounded-lg'>
+            echo "
+                <div class='flex items-center justify-between gap-4 p-4 border rounded-lg'>
                     <div class='flex items-center gap-4'>
                         <img src='media/{$row['ImageUrl']}' class='w-24 h-24 object-cover rounded'>
                         <div class='flex flex-col'>
@@ -58,8 +58,17 @@ if(!$cart->getCart()){
                     </div>
                 </div>
                 ";
-        
         }
+        
+        echo "
+            <div class='flex items-center p-2 gap-1 justify-end'> 
+                <h3>Order Total: </h3><p>£{$ordertotal}</p>
+            </div>";
+        
+        echo "
+            <div class='flex justify-end items-center pt-2'>
+                <a href='neworder.php' class='inline-block bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition'>Purchase</a> 
+            </div>";
 
     }
     ?>
