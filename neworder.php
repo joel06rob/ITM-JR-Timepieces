@@ -7,6 +7,9 @@ if(!isset($_SESSION['cart']) || empty($_SESSION['cart'])){
     exit;
 }
 
+//Errors - Get invalid entry errors
+$errors = $_GET['error'] ?? '';
+
 ?>
 
 <!DOCTYPE html>
@@ -58,6 +61,25 @@ if(!isset($_SESSION['cart']) || empty($_SESSION['cart'])){
                 <h3>Order Total: </h3><p>£{$ordertotal}</p>
             </div>";
         
+        ?>
+
+        <?php
+
+        //Erros - Display input errors from form submission
+        if(isset($errors)){
+            switch($errors){
+            case 'invalid_phone':
+                echo "<p class='text-red-600'>Enter a valid phone number.</p>";
+                break;
+            case 'invalid_postcode':
+                echo "<p class='text-red-600'>Enter a valid post code.</p>";
+                break;
+            case 'invalid_name':
+                echo "<p class='text-red-600'>Enter a valid name.</p>";
+                break;
+        }
+        }
+
         ?>
 
         <!--  Order details form, using POST for security  -->
