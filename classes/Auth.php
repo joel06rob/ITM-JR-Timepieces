@@ -10,8 +10,8 @@
         }
 
         //Login User:
-        //Check if user exists, if true check if users password is correct.
-        //Create a new user session and return true.
+        //Check if user exists, check if users password is correct.
+        // If above is true: Create a new user session and return true.
         public function loginUser($email, $password){
             
             //Email

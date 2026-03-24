@@ -3,10 +3,59 @@
 class Order {
     private $conn;
 
-    function __construct($conn){
+    function __construct($conn)
+    {
         $this->conn = $conn;
-        
     }
+
+    public function createOrder($user_id, $cart){
+        
+        //Pre-Set values
+        // Created (Timestamp: Now)
+        // Initial Status: Processing
+        $created = date("Y-m-d H:i:s");
+        $status = "Processing";
+
+        $sql = "INSERT INTO Orders (CustomerID, OrderDate, Status) VALUES (?, ?, ?)";
+        $stmt = mysqli_stmt_init($this->conn);
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            echo "ERROR: SQL STMT FAILED";
+            return;
+        }
+        
+        mysqli_stmt_bind_param($stmt, "iss", $user_id, $created, $status);
+        mysqli_stmt_execute($stmt);
+
+        //Get the inserted ID to Orders
+        $order_id = mysqli_insert_id($this->conn);
+        $product_ids = implode(",", array_keys($cart));
+
+        $sql = "SELECT ID, Price FROM Product WHERE ID IN ($product_ids)";
+        $result = mysqli_query($this->conn, $sql);
+
+        //Loop through all products in Cart
+        while($row = mysqli_fetch_assoc($result)){
+            $product_id = $row['ID'];
+            $price = $row['Price'];
+            $quantity = $cart[$product_id];
+
+            //Insert into Orders_Items each individual item
+            $sql = "INSERT INTO Orders_Items (ProductID, OrderID, Quantity, PriceAtPurchase) VALUES (?, ?, ?, ?)";
+            $stmt = mysqli_stmt_init($this->conn);
+            if(!mysqli_stmt_prepare($stmt, $sql)){
+                echo "ERROR: SQL STMT FAILED";
+                return;
+            }
+            
+            mysqli_stmt_bind_param($stmt, "iiid", $product_id, $order_id, $quantity, $price);
+            mysqli_stmt_execute($stmt);
+        }
+        
+        return true;
+    }
+
+
+
 
     public function countAllOrders(){
         $sql = "SELECT COUNT(*) AS TotalOrders FROM Orders";

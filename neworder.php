@@ -60,6 +60,8 @@ $errors = $_GET['error'] ?? '';
             <div class='flex items-center p-2 gap-1 justify-end'> 
                 <h3>Order Total: </h3><p>£{$ordertotal}</p>
             </div>";
+
+        $_SESSION['ordertotal'] = $ordertotal;
         
         ?>
 
