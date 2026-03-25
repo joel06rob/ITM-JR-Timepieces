@@ -8,6 +8,8 @@ class Order {
         $this->conn = $conn;
     }
 
+    
+    
     public function createOrder($user_id, $cart){
         
         //Pre-Set values
@@ -55,8 +57,32 @@ class Order {
     }
 
 
+    public function getAllUserOrders($user_id){
+        $sql = "SELECT * FROM Orders WHERE CustomerID = ?";
+        $stmt = mysqli_stmt_init($this->conn);
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            echo "ERROR: SQL STMT FAILED";
+            return;
+        }
+        
+        mysqli_stmt_bind_param($stmt, "i", $user_id);
+        mysqli_stmt_execute($stmt);
+
+        //Get the results and input into array to return
+        $result = mysqli_stmt_get_result($stmt);
+        $orders= array();
+        foreach($result as $row){
+            $orders[] = $row;
+        }
+
+        return $orders;
+        
+        
+    }
 
 
+    //TODO: Move all these to Admin class
+    //
     public function countAllOrders(){
         $sql = "SELECT COUNT(*) AS TotalOrders FROM Orders";
         $result = mysqli_query($this->conn, $sql);

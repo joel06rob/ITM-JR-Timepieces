@@ -1,3 +1,9 @@
+<?php 
+require_once "init.php";
+$order = new Order($conn);
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,9 +38,47 @@
 </nav>
 
 
-<!-- ORDERS -->
+<!-- ALL ORDERS -->
 <div id="products" class="max-w-7xl mx-auto py-20 pb-28 px-4">
 
+<?php 
+
+$userorders = $order->getAllUserOrders($_SESSION['user_id']);
+
+if(!$userorders){
+  echo "<p class='text-white'>No Orders Found.</p>";
+}
+else{
+
+  //Display:
+  // header
+  // orders data
+
+  echo "<div class='py-10'>
+        <div class='px-8 py-4 bg-gray-800'>
+          <ul class='flex list-none justify-between text-white'>
+            <li>Order ID
+            <li>Order Date
+            <li>Status
+          </ul>
+        </div>
+        ";
+
+  foreach($userorders as $userorder){
+    echo "<div class='flex items-center justify-between bg-white gap-4 p-4 border'>
+                    <div class='flex items-center px-10 gap-20'>
+                        <p>{$userorder['ID']}</p>
+                        <p>{$userorder['OrderDate']}</p>
+                        <p>{$userorder['Status']}</p>
+                    </div>
+          </div>";
+  }
+
+  echo "</div>";
+}
+
+
+?>
 
 </div>
 
