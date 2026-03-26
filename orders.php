@@ -1,5 +1,10 @@
 <?php 
 require_once "init.php";
+
+if(!$_SESSION['user_id']){
+  header("Location: index.php");
+}
+
 $order = new Order($conn);
 ?>
 
@@ -62,18 +67,33 @@ else{
             <li>Status
           </ul>
         </div>
+        <div class='flex flex-col gap-1'>
         ";
 
   foreach($userorders as $userorder){
-    echo "<div class='flex items-center justify-between bg-white gap-4 p-4 border'>
-                    <div class='flex items-center px-10 gap-20'>
-                        <p>{$userorder['ID']}</p>
-                        <p>{$userorder['OrderDate']}</p>
-                        <p>{$userorder['Status']}</p>
-                    </div>
+
+    $status = $userorder['Status'];
+    if($status == "Completed"){
+      $statusClass = "bg-green-500/20 text-green-500";
+    }
+    elseif($status == "Processing"){
+      $statusClass = "bg-blue-500/20 text-blue-500";
+    }
+    elseif($status == "Cancelled"){
+      $statusClass = "bg-red-500/20 text-red-500";
+    }
+    else{
+      $statusClass = "bg-gray-500 text-white";
+    }
+
+    echo "<div class='flex items-center justify-between bg-white gap-4 py-4 px-8 border'>             
+                      <p>{$userorder['ID']}</p>
+                      <p class='pl-2 text-xs'>{$userorder['OrderDate']}</p>
+                      <p class='px-4 py-1 rounded-xl text-sm {$statusClass}'>{$status}</p>
           </div>";
   }
 
+  echo "</div>";
   echo "</div>";
 }
 
