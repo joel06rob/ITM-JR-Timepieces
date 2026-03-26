@@ -8,7 +8,7 @@ if (!$auth->checkAdmin()){
   exit;
 }
 
-$orders = new Order($conn);
+$orders = new Admin($conn);
 $totalOrders = $orders->countAllOrders();
 $unprocessedOrders = $orders->countUnprocessedOrders();
 $totalOrdersByDate = $orders->countOrdersByDate();

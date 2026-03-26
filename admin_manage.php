@@ -7,6 +7,7 @@ require_once "init.php";
   exit;
   }
 
+  $admin = new Admin($conn);
 ?>
 
 
@@ -47,7 +48,59 @@ require_once "init.php";
 <!-- ADMIN -->
 <div id="products" class="max-w-7xl mx-auto py-20 pb-28 px-4">
 
-    <h2 class="text-3xl font-bold mb-5 text-center text-white">Admin Manage</h2>
+  <h2 class="text-3xl font-bold mb-5 text-center text-white">Admin Manage</h2>
+  <?php 
+
+  $orders = $admin->getAllOrders();
+  
+  if(!$orders){
+  echo "<p class='text-white'>No Orders Found.</p>";
+  }
+  else{
+
+    //Display:
+    // header
+    // orders data
+
+    echo "<div class='py-10'>
+          <div class='px-8 py-4 bg-gray-800'>
+            <ul class='flex list-none justify-between text-white'>
+              <li>Order ID
+              <li>Order Date
+              <li>Status
+            </ul>
+          </div>
+          <div class='flex flex-col gap-1'>
+          ";
+
+    foreach($orders as $order){
+
+      $status = $order['Status'];
+      if($status == "Completed"){
+        $statusClass = "bg-green-500/20 text-green-500";
+      }
+      elseif($status == "Processing"){
+        $statusClass = "bg-blue-500/20 text-blue-500";
+      }
+      elseif($status == "Cancelled"){
+        $statusClass = "bg-red-500/20 text-red-500";
+      }
+      else{
+        $statusClass = "bg-gray-500 text-white";
+      }
+
+      echo "<div class='flex items-center justify-between bg-white gap-4 py-4 px-8 border'>             
+                        <p>{$order['ID']}</p>
+                        <p class='pl-2 text-xs'>{$order['OrderDate']}</p>
+                        <p class='px-4 py-1 rounded-xl text-sm {$statusClass}'>{$status}</p>
+            </div>";
+    }
+
+    echo "</div>";
+    echo "</div>";
+  }
+  
+  ?>
 
 </div>
 
