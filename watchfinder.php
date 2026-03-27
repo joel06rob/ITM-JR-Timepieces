@@ -1,7 +1,18 @@
 <?php 
 require_once "init.php";
 $product = new Product($conn);
-$product_results = $product->getProducts("all");
+
+//Load products from DB
+//If no search - load all, else load only searched products
+//
+$product_results;
+if($_SERVER['REQUEST_METHOD'] !== 'GET'){
+  $product_results = $product->getProducts("all");
+}
+else{
+  $product_results = $product->getProducts($_GET['search'] ?? "");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +48,7 @@ $product_results = $product->getProducts("all");
     </div>
 </nav>
 <section class="my-40 mx-auto">
+  <!--SEARCH-->
     <form id="searchForm" method="GET" action="watchfinder.php" class="mx-10">
         <input type="text" name="search" id="searchInput" placeholder="Search for watches" class="font-[20] text-4xl w-full bg-transparent outline-none border-none text-[#1a1a1]">
     </form>
@@ -48,9 +60,6 @@ $product_results = $product->getProducts("all");
         foreach($product_results as $product_result){
             echo '
                 <div class="relative group bg-white shadow p-5 text-center transition-transform duration-300 ease-in-out shadow-[0_1px_5px_rgba(0,0,0,0.25)]">
-                <div class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover:block w-max bg-black text-white text-xs rounded px-2 py-1">
-                '. $product_result['Description'] .'
-                </div>
                 <img 
                     src="media/' . $product_result['ImageUrl'] . '" 
                     alt="'.$product_result['Name'].'"
@@ -58,7 +67,27 @@ $product_results = $product->getProducts("all");
                 >
 
                 <h5 class="text-xl font-semibold mb-1">'. $product_result['Name'] .'</h5>
-                <p class="text-gray-500 mb-4">£'. $product_result['Price'] .'</p> ';
+                <p class="text-gray-500 mb-4">£'. $product_result['Price'] .'</p> 
+                <div class="items-center bottom-full mb-2 hidden group-hover:block w-max bg-black text-white text-xs rounded px-2 py-1">
+                '. $product_result['Description'] .'
+                </div>';
+                
+
+                //Check if item is in stock, if so display add to cart button else tell the user they are out of stock.
+                if($product_result['Stock'] > 0){
+                      echo '<form method="POST" action="add_to_basket.php">
+                          <input type="hidden" name="product_id" value="'.$product_result["ID"].'">
+                          <button type="submit"
+                          class="inline-block bg-none text-black font-[50] px-4 py-2 rounded-lg hover:text-[#cccccc] transition">
+                          ADD TO CART
+                          </button>
+                      </form>';
+                  } 
+                  else{
+
+                      echo '<p class="text-red-500 font-semibold">Out of stock</p>';
+                  
+                  }
                 
                 echo '</div>';
         }
