@@ -104,9 +104,6 @@
             while ($row = mysqli_fetch_assoc($product_results)) {
              echo '
                 <div class="relative group bg-white shadow p-5 text-center transition-transform duration-300 ease-in-out shadow-[0_1px_5px_rgba(0,0,0,0.25)]">
-                <div class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover:block w-max bg-black text-white text-xs rounded px-2 py-1">
-                '. $row['Description'] .'
-                </div>
                 <img 
                     src="media/' . $row['ImageUrl'] . '" 
                     alt="'.$row['Name'].'"
@@ -122,8 +119,8 @@
                     <form method="POST" action="add_to_basket.php">
                         <input type="hidden" name="product_id" value="'.$row["ID"].'">
                         <button type="submit"
-                        class="inline-block bg-none text-[#BFB578] font-semibold px-4 py-2 rounded-lg hover:text-[#161616] transition">
-                        Add to Cart
+                        class="inline-block bg-none text-black font-[50] px-4 py-2 rounded-lg hover:text-[#cccccc] transition">
+                        ADD TO CART
                         </button>
                     </form>
                     ';

@@ -55,22 +55,23 @@ else{
     <hr class="border-t border-[#b0aca6] mx-0 mt-3">
 
     <!--WATCHES-->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 mt-6">
         <?php 
         foreach($product_results as $product_result){
             echo '
-                <div class="relative group bg-white shadow p-5 text-center transition-transform duration-300 ease-in-out shadow-[0_1px_5px_rgba(0,0,0,0.25)]">
+                <div class="relative group bg-white overflow-hidden shadow p-5 text-center transition-transform duration-300 ease-in-out shadow-[0_1px_5px_rgba(0,0,0,0.1)] hover:cursor-pointer">
                 <img 
                     src="media/' . $product_result['ImageUrl'] . '" 
                     alt="'.$product_result['Name'].'"
-                    class="w-full h-40 object-cover rounded-lg mb-4 transition-transform duration-300 ease-in-out group-hover:scale-110"
+                    class="w-full h-40 object-contain rounded-lg mb-4 transition-transform duration-300 ease-in-out group-hover:scale-125"
                 >
 
                 <h5 class="text-xl font-semibold mb-1">'. $product_result['Name'] .'</h5>
+                <p class="text-sm text-gray-400 opacity-100 max-h-20 overflow-hidden transition-all duration-300 group-hover:opacity-0 group-hover:max-h-0">
+                    '. $product_result['Description'] .'
+                </p>
                 <p class="text-gray-500 mb-4">£'. $product_result['Price'] .'</p> 
-                <div class="items-center bottom-full mb-2 hidden group-hover:block w-max bg-black text-white text-xs rounded px-2 py-1">
-                '. $product_result['Description'] .'
-                </div>';
+                ';
                 
 
                 //Check if item is in stock, if so display add to cart button else tell the user they are out of stock.
