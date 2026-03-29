@@ -1,5 +1,6 @@
 <?php
     require_once "init.php";
+    $product = new Product($conn);
 ?>
 
 <!DOCTYPE html>
@@ -91,14 +92,13 @@
     <h3 class="text-2xl font-regular mb-20 text-center text-[#BFB578]">Explore our finest timepieces</h3>
 
     <!--PRODUCTS GRID-->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
 
     <?php
         //Connect to database
-        //Select all products
-        //TODO: Add Sorting
-        $sql = "SELECT * FROM Product";
-        $product_results = mysqli_query($conn, $sql);
+        //Select showcase products
+        $product_results = $product->getShowcaseProducts();
+        
 
         if (mysqli_num_rows($product_results) > 0) {
             while ($row = mysqli_fetch_assoc($product_results)) {
@@ -107,7 +107,7 @@
                 <img 
                     src="media/' . $row['ImageUrl'] . '" 
                     alt="'.$row['Name'].'"
-                    class="w-full h-40 object-cover rounded-lg mb-4 transition-transform duration-300 ease-in-out group-hover:scale-110"
+                    class="w-full h-40 object-contain rounded-lg mb-4 transition-transform duration-300 ease-in-out group-hover:scale-110"
                 >
 
                 <h5 class="text-xl font-semibold mb-1">'. $row['Name'] .'</h5>

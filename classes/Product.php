@@ -39,7 +39,10 @@ class Product {
     }
 
     function getShowcaseProducts(){
+        $sql = "SELECT * FROM Product WHERE ID = 3 OR ID = 10 OR ID = 6";
+        $result = mysqli_query($this->conn, $sql); 
 
+        return $result;
     }
 
 }
