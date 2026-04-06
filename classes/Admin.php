@@ -23,6 +23,30 @@ class Admin {
         return $data;
     }
 
+    public function deleteOrder($order_id){
+        $sql = "UPDATE Orders SET Status = 'Cancelled' WHERE ID = ?";
+        $stmt = mysqli_stmt_init($this->conn);
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            echo "ERROR: SQL STMT FAILED";
+            return;
+        }
+        mysqli_stmt_bind_param($stmt, "i", $order_id);
+        mysqli_stmt_execute($stmt);
+
+        //TODO: Add Boolean Return Value
+    }
+
+    public function updateOrder($order_id, $status){
+        $sql = "UPDATE Order SET Status = ? WHERE ID = ?";
+        $stmt = mysqli_stmt_init($this->conn);
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            echo "ERROR: SQL STMT FAILED";
+            return;
+        }
+        mysqli_stmt_bind_param($stmt, "si", $status, $order_id);
+        mysqli_stmt_execute($stmt);
+    }
+
 
     //admin_data_dash.php
     //
@@ -74,7 +98,7 @@ class Admin {
     
 
     public function countMostPopular(){
-        $sql = "SELECT p.Name, SUM(oi.Quantity) AS TotalUnitsSold FROM Orders_Items oi JOIN Product p ON p.ID = oi.ProductID JOIN Orders o ON o.ID = oi.OrderID WHERE o.Status = 'Completed' GROUP BY p.Name ORDER BY TotalUnitsSold DESC LIMIT 1";
+        $sql = "SELECT p.Name, SUM(oi.Quantity) AS TotalUnitsSold FROM Orders_Items oi JOIN Product p ON p.ID = oi.ProductID JOIN Orders o ON o.ID = oi.OrderID GROUP BY p.Name ORDER BY TotalUnitsSold DESC LIMIT 1";
         $result = mysqli_query($this->conn, $sql);
         return mysqli_fetch_assoc($result);
     }

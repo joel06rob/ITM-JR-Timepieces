@@ -92,8 +92,20 @@ require_once "init.php";
       echo "<div class='flex items-center justify-between bg-white gap-4 py-4 px-8 border'>             
                         <p>{$order['ID']}</p>
                         <p class='pl-2 text-xs'>{$order['OrderDate']}</p>
-                        <p class='px-4 py-1 rounded-xl text-sm {$statusClass}'>{$status}</p>
-            </div>";
+                        <p class='px-4 py-1 rounded-xl text-sm {$statusClass}'>{$status}</p>";
+
+      //TODO: FIX LAYOUT OF CANCELLED STATUS
+      if($status != "Cancelled"){
+        echo "<form method='POST' action='admin_manage_delete.php'>
+                            <input type='hidden' name='orderid' value='".$order["ID"]."'>
+                            <button type='submit'
+                            class='inline-block bg-none text-red-600 font-[50] px-4 py-2 rounded-lg hover:text-red-800 transition'>
+                            ✖
+                            </button>
+                        </form>";
+      }
+
+      echo "</div>";
     }
 
     echo "</div>";

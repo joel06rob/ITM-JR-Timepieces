@@ -7,7 +7,7 @@ class Product {
         $this->conn = $conn;
     }
 
-    function getProducts($searchterm){
+    public function getProducts($searchterm){
         if($searchterm == "all"){
             $sql = "SELECT * FROM Product";
         }
@@ -38,7 +38,7 @@ class Product {
         return $products;
     }
 
-    function getShowcaseProducts(){
+    public function getShowcaseProducts(){
         $sql = "SELECT * FROM Product WHERE ID = 3 OR ID = 10 OR ID = 6";
         $result = mysqli_query($this->conn, $sql); 
 
