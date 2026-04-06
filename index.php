@@ -23,12 +23,12 @@
         <!-- Navigation Links -->
         <ul class="flex gap-10 bg-gradient-to-r from-[#242424] to-[#2D2D2D] p-4 px-11 rounded-[35px] font-medium text-white shadow-[0_1px_5px_rgba(0,0,0,0.25)] items-center">
           
-          <li><a href="#products" class="hover:text-gray-300 transition-colors duration-200">Watches</a></li>
-          <li><a href="#products" class="hover:text-gray-300 transition-colors duration-200">My Orders</a></li>
-          <li><a href="#products" class="hover:text-gray-300 transition-colors duration-200">Basket</a></li>
+          <li><a href="watchfinder.php" class="hover:text-gray-300 transition-colors duration-200">Watches</a></li>
+          <li><a href="orders.php" class="hover:text-gray-300 transition-colors duration-200">My Orders</a></li>
+          <li><a href="basket.php" class="hover:text-gray-300 transition-colors duration-200">Basket</a></li>
           
           <div class="flex gap-5 items-center pl-6">
-            <button><a href="#products"><img src="media/icons8-women's-watch-30.png"></a><button>
+            <button><a href="watchfinder.php"><img src="media/icons8-women's-watch-30.png"></a><button>
             <button id="profileButton"><img src="media/icons8-person-30.png"></button>
             <div id="profileDropdown" class="hidden absolute right-0 mt-40 w-40 bg-white text-black rounded-lg shadow-lg">
 
@@ -147,7 +147,7 @@
     </div>
     <div class="flex justify-center mt-10">
         <!--TODO: Create Watch Finder Search -->
-        <button class="justify-center bg-white text-black px-8 py-5">FIND WATCH</button>
+        <button class="justify-center bg-white text-black px-8 py-5"><a href="watchfinder.php">FIND WATCH</a></button>
     </div>
 </div>
 
@@ -161,8 +161,8 @@
 
 <footer class="flex text-white font-medium py-8 px-8 gap-6">
     <a href="#">Contact Us</a>
-    <a href="#">Make a Purchase</a>
-    <a href="cart.php">Your Cart</a>
+    <a href="watchfinder.php">Make a Purchase</a>
+    <a href="basket.php">Your Cart</a>
 </footer>
 
 <script src="app.js" defer></script>
