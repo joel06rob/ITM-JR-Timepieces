@@ -12,8 +12,17 @@ class Admin {
 
     //admin_manage.php
     //
-    public function getAllOrders(){
-        $sql = "SELECT * FROM Orders";
+
+    //Get all orders for the admin manage list. If filter value is null then default to all orders else display orders with where clause.
+    public function getAllOrders($filter = null){
+        
+        if($filter !== null && $filter !== ''){
+            $sql = "SELECT * FROM Orders WHERE Status = '$filter'";
+        }
+        else{
+            $sql = "SELECT * FROM Orders";
+        }
+        
         $result = mysqli_query($this->conn, $sql);
 
         $data = array();
@@ -46,6 +55,7 @@ class Admin {
         mysqli_stmt_bind_param($stmt, "si", $status, $order_id);
         mysqli_stmt_execute($stmt);
     }
+
 
 
     //admin_data_dash.php

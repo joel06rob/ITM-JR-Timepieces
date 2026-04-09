@@ -8,6 +8,16 @@ require_once "init.php";
   }
 
   $admin = new Admin($conn);
+
+  $statusFilter = $_GET['status'] ?? null;
+  if($statusFilter){
+    $orders = $admin->getAllOrders($statusFilter);
+  }
+  else{
+    $orders = $admin->getAllOrders();
+  }
+  
+
 ?>
 
 
@@ -50,8 +60,6 @@ require_once "init.php";
 
   <h2 class="text-3xl font-bold mb-5 text-center text-white">Admin Manage</h2>
   <?php 
-
-  $orders = $admin->getAllOrders();
   
   if(!$orders){
   echo "<p class='text-white'>No Orders Found.</p>";
@@ -62,6 +70,28 @@ require_once "init.php";
     // header
     // orders data
 
+    echo "<form method='GET' class='flex justify-end'>
+      <select name='status' onchange='this.form.submit()' 
+          class='px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-600'>
+          
+          <option value='' " . (($statusFilter == '') ? 'selected' : '') . ">
+              All Orders
+          </option>
+
+          <option value='Processing' " . (($statusFilter == 'Processing') ? 'selected' : '') . ">
+              Processing
+          </option>
+
+          <option value='Completed' " . (($statusFilter == 'Completed') ? 'selected' : '') . ">
+              Completed
+          </option>
+
+          <option value='Cancelled' " . (($statusFilter == 'Cancelled') ? 'selected' : '') . ">
+              Cancelled
+          </option>
+
+      </select>
+  </form>";
     echo "<div class='py-10'>
           <div class='px-8 py-4 bg-gray-800'>
             <ul class='flex list-none justify-between text-white'>
