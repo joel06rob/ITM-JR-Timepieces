@@ -51,7 +51,7 @@ $hiddencardnumber = substr($cardnumber, -4);
 //Insert order to DB
 
 $order = new Order($conn);
-$order->createOrder($_SESSION['user_id'], $_SESSION['cart']);
+$order_id = $order->createOrder($_SESSION['user_id'], $_SESSION['cart']);
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +64,7 @@ $order->createOrder($_SESSION['user_id'], $_SESSION['cart']);
 
         <div class="max-w-4xl mx-auto mt-10 p-6 bg-white shadow rounded-lg">
 
-        <h1 class="text-3xl font-bold mb-6">Order Details:</h1>
+        <h1 class="text-3xl font-bold mb-6">Order Details [<?= $order_id ?>]:</h1>
 
         <?php
 
@@ -83,8 +83,41 @@ $order->createOrder($_SESSION['user_id'], $_SESSION['cart']);
                     <br>
                     <p><i><b>The details of your order are listed below:</b></i></p>
                     <p>Email:" . htmlspecialchars($email) . "</p>
-                    <p>Phone:" . htmlspecialchars($phone) . "</p>
+                    <p>Phone:" . htmlspecialchars($phone) . "</p> ";
+                    
+            //Prepare product IDs for SELECT statement. i.e. {1=>2, 4=>1, 7=>3} --> 1,4,7
+            $product_ids = implode(",", array_keys($_SESSION['cart']));
 
+            $sql = "SELECT * FROM Product WHERE ID IN ($product_ids)";
+            $result = mysqli_query($conn, $sql);
+
+            $ordertotal = 0;
+
+            while($row = mysqli_fetch_assoc($result)){
+
+                $product_id = $row['ID'];
+                $quantity = $_SESSION['cart'][$product_id];
+                $price = $row['Price'];
+                $subtotal = $price * $quantity;
+
+                $ordertotal += $subtotal;
+                
+                echo "
+                    <div class='flex items-center justify-between mt-1 gap-1 p-1 border rounded-lg'>
+                        <div class='flex items-center gap-4'>
+                            <img src='media/{$row['ImageUrl']}' class='w-10 h-10 object-cover rounded'>
+                            <div class='flex flex-col'>
+                                <p class='text-sm font-semibold'>{$row['Name']}</p>
+                                <p class='text-gray-600 text-xs'>£{$subtotal}</p>
+                                <p class='text-xs font-light'>{$quantity}</p>
+                            </div>
+                        </div>
+                    </div>
+                    ";
+            }
+                    
+
+            echo "
                     <br>
                     <p><i><b>Delivery Information:</b></i></p>
                     <p>" . htmlspecialchars($firstaddress) . "</p>
@@ -93,7 +126,7 @@ $order->createOrder($_SESSION['user_id'], $_SESSION['cart']);
                     <p>" . htmlspecialchars($postcode) . "</p>
 
                     <br>
-                    <p><i>Total Paid:</i></p>
+                    <p><i><b>Total Paid:</b></i></p>
                     <p>£" . $ordertotal . "</p>
                     <p>Paid With:</p>
                     <p>•••• •••• •••• ". $hiddencardnumber ."</p>

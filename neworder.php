@@ -84,6 +84,7 @@ $errors = $_GET['error'] ?? '';
 
         ?>
 
+        <!--TODO: Pre-populate fields with logged in user info.-->
         <!--  Order details form, using POST for security  -->
         <form class="my-8 grid grid-cols-2 grid-rows-7 gap-4" action="invoice.php" method="POST">
             <span><strong>Details</strong></span><span></span>

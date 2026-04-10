@@ -28,8 +28,10 @@ class Order {
         mysqli_stmt_bind_param($stmt, "iss", $user_id, $created, $status);
         mysqli_stmt_execute($stmt);
 
-        //Get the inserted ID to Orders
+        //Get the inserted ID in Orders
         $order_id = mysqli_insert_id($this->conn);
+
+        //Get the products in the cart
         $product_ids = implode(",", array_keys($cart));
 
         $sql = "SELECT ID, Price FROM Product WHERE ID IN ($product_ids)";
@@ -53,7 +55,7 @@ class Order {
             mysqli_stmt_execute($stmt);
         }
         
-        return true;
+        return $order_id;
     }
 
 
