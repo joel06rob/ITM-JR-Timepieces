@@ -51,6 +51,11 @@
 
   <h2 class="text-3xl font-bold mb-5 text-center text-white">Admin Dashboard</h2>
 
+<div class="flex">
+    <a class="py-3 px-6 text-white" href="admin_manage.php">Manage</a>
+    <a class="py-3 px-6 text-black bg-white rounded-[35px]" href="admin_manage.php">Dashboard</a>
+</div>
+
   <div class="flex flex-col gap-10">
   <!--DASHBOARD: ORDERS-->
   <h3 class="text-center text-xl font-bold text-white m-10">Orders</h3>

@@ -69,6 +69,11 @@ require_once "init.php";
 <div id="products" class="max-w-7xl mx-auto py-20 pb-28 px-4">
 
   <h2 class="text-3xl font-bold mb-5 text-center text-white">Admin Manage</h2>
+
+  <div class="flex">
+    <a class="py-3 px-6 text-black bg-white rounded-[35px]" href="admin_manage.php">Manage</a>
+    <a class="py-3 px-6 text-white" href="admin_dash.php">Dashboard</a>
+</div>
   <?php 
   
   if(!$orders){
@@ -100,6 +105,10 @@ require_once "init.php";
               Cancelled
           </option>
 
+          <option value='Dispatched' " . (($statusFilter == 'Dispatched') ? 'selected' : '') . ">
+              Dispatched
+          </option>
+
       </select>
   </form>";
     echo "<div class='py-10'>
@@ -125,6 +134,9 @@ require_once "init.php";
       }
       elseif($status == "Cancelled"){
         $statusClass = "bg-red-500/20 text-red-500";
+      }
+      elseif($status == "Dispatched"){
+        $statusClass = "bg-yellow-400/20 text-yellow-400";
       }
       else{
         $statusClass = "bg-gray-500 text-white";
@@ -152,6 +164,10 @@ require_once "init.php";
 
                               <option value='Cancelled' " . (($status == 'Cancelled') ? 'selected' : '') . ">
                                   Cancelled
+                              </option>
+
+                              <option value='Dispatched' " . (($status == 'Dispatched') ? 'selected' : '') . ">
+                                  Dispatched
                               </option>
 
                           </select>
