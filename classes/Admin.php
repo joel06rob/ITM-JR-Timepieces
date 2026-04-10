@@ -46,7 +46,7 @@ class Admin {
     }
 
     public function updateOrder($order_id, $status){
-        $sql = "UPDATE Order SET Status = ? WHERE ID = ?";
+        $sql = "UPDATE Orders SET Status = ? WHERE ID = ?";
         $stmt = mysqli_stmt_init($this->conn);
         if(!mysqli_stmt_prepare($stmt, $sql)){
             echo "ERROR: SQL STMT FAILED";

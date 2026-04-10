@@ -9,6 +9,14 @@ require_once "init.php";
 
   $admin = new Admin($conn);
 
+  if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])){
+    
+    $order_id = $_POST['order_id'];
+    $new_status = $_POST['status'];
+
+    $admin->updateOrder($order_id, $new_status);
+}
+
   $statusFilter = $_GET['status'] ?? null;
   if($statusFilter){
     $orders = $admin->getAllOrders($statusFilter);
@@ -16,6 +24,8 @@ require_once "init.php";
   else{
     $orders = $admin->getAllOrders();
   }
+
+  
   
 
 ?>
@@ -96,6 +106,7 @@ require_once "init.php";
           <div class='px-8 py-4 bg-gray-800'>
             <ul class='flex list-none justify-between text-white'>
               <li>Order ID
+              <li>Customer ID
               <li>Order Date
               <li>Status
             </ul>
@@ -119,10 +130,36 @@ require_once "init.php";
         $statusClass = "bg-gray-500 text-white";
       }
 
-      echo "<div class='flex items-center justify-between bg-white gap-4 py-4 px-8 border'>             
-                        <p>{$order['ID']}</p>
-                        <p class='pl-2 text-xs'>{$order['OrderDate']}</p>
-                        <p class='px-4 py-1 rounded-xl text-sm {$statusClass}'>{$status}</p>";
+      echo "<div class='flex items-center bg-white gap-4 py-4 px-8 border'>   
+                        <div class='flex-1 flex items-center gap-4'>          
+                          <p>{$order['ID']}</p>
+                          <p>{$order['CustomerID']}</p>
+                          <p class='pl-2 text-xs'>{$order['OrderDate']}</p>
+                        </div>
+                        <div class='flex-1'>
+                          <form method='POST' class='inline-block'>
+                          <input type='hidden' name='order_id' value='{$order['ID']}'>
+                          <select name='status' onchange='this.form.submit()'
+                              class='px-3 py-1 rounded-lg text-sm border {$statusClass}'>
+
+                              <option value='Processing' " . (($status == 'Processing') ? 'selected' : '') . ">
+                                  Processing
+                              </option>
+
+                              <option value='Completed' " . (($status == 'Completed') ? 'selected' : '') . ">
+                                  Completed
+                              </option>
+
+                              <option value='Cancelled' " . (($status == 'Cancelled') ? 'selected' : '') . ">
+                                  Cancelled
+                              </option>
+
+                          </select>
+                          <input type='hidden' name='update_status' value='1'>
+                          </form>
+                        </div>
+                        <div class='flex-1 flex justify-end'>
+                        ";
 
       //TODO: FIX LAYOUT OF CANCELLED STATUS
       if($status != "Cancelled"){
@@ -130,12 +167,15 @@ require_once "init.php";
                             <input type='hidden' name='orderid' value='".$order["ID"]."'>
                             <button type='submit'
                             class='inline-block bg-none text-red-600 font-[50] px-4 py-2 rounded-lg hover:text-red-800 transition'>
-                            ✖
+                            Cancel
                             </button>
                         </form>";
       }
+      else{
+        echo "<div class='w-6'></div>";
+      }
 
-      echo "</div>";
+      echo "</div></div>";
     }
 
     echo "</div>";
