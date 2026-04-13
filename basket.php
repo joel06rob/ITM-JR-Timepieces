@@ -13,7 +13,7 @@ if(!$cart->getCart()){
 <!DOCTYPE html>
 <html class="bg-[#161616]">
 <head>
-    <title>Your Cart</title>
+    <title>Your Basket</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -21,12 +21,12 @@ if(!$cart->getCart()){
 
 <div class="max-w-4xl mx-auto mt-10 p-6 bg-white shadow rounded-lg">
 
-    <h1 class="text-3xl font-bold mb-6">Your Cart</h1>
+    <h1 class="text-3xl font-[200] mb-6">Your Basket</h1>
      
     <?php
     //Check if cart is empty - display if so.
     if (empty($_SESSION['cart'])) {
-        echo "<p>Your cart is empty.</p>";
+        echo "<p>No Products in Your Cart yet.</p>";
     }
     else{
         //Prepare product IDs for SELECT statement. i.e. {1=>2, 4=>1, 7=>3} --> 1,4,7
@@ -73,7 +73,7 @@ if(!$cart->getCart()){
     }
     ?>
 
-    <a href='index.php' class='text-[#BFB578] font-semibold inline-block pt-4 hover:text-[#161616]'>← Continue Shopping</a>
+    <a href='index.php' class='text-black font-[50] pt-4 rounded-lg hover:text-[#cccccc]'>← Continue Shopping</a>
     
 
 </div>

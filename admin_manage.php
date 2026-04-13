@@ -87,7 +87,7 @@ require_once "init.php";
 
     echo "<form method='GET' class='flex justify-end'>
       <select name='status' onchange='this.form.submit()' 
-          class='px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-600'>
+          class='px-4 py-2 rounded-[35px] bg-[#242424] text-white border border-gray-600'>
           
           <option value='' " . (($statusFilter == '') ? 'selected' : '') . ">
               All Orders

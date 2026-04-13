@@ -28,7 +28,7 @@ $order = new Order($conn);
       <div class="flex items-center gap-6">
         <!-- Navigation Links -->
         <ul class="flex gap-10 bg-gradient-to-r from-[#242424] to-[#2D2D2D] p-4 px-11 rounded-[35px] font-medium text-white shadow-[0_1px_5px_rgba(0,0,0,0.25)] items-center">
-          <li><a href="watchfinder.php" class="hover:text-gray-300 transition-colors duration-200">Watches</a></li>
+          <li><a href="index.php" class="hover:text-gray-300 transition-colors duration-200">Watches</a></li>
           <li><a href="orders.php" class="hover:text-gray-300 transition-colors duration-200">My Orders</a></li>
           <li><a href="basket.php" class="hover:text-gray-300 transition-colors duration-200">Basket</a></li>
           
@@ -60,7 +60,7 @@ else{
   // orders data
 
   echo "<div class='py-10'>
-        <div class='px-8 py-4 bg-gray-800'>
+        <div class='px-8 py-4 bg-[#242424]'>
           <ul class='flex list-none justify-between text-white'>
             <li>Order ID
             <li>Order Date
@@ -81,6 +81,9 @@ else{
     }
     elseif($status == "Cancelled"){
       $statusClass = "bg-red-500/20 text-red-500";
+    }
+    elseif($status == "Dispatched"){
+      $statusClass = "bg-yellow-400/20 text-yellow-400";
     }
     else{
       $statusClass = "bg-gray-500 text-white";

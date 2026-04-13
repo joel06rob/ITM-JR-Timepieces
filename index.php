@@ -74,12 +74,24 @@
 <section class="relative h-screen overflow-hidden">
     <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline><source src="media/204581-925146029_small.mp4"/></video>
     <div class="relative z-10 flex-col text-white p-10">
-        <div class="flex flex-col">
-            <p class="text-[128px] italic font-bold">MEMBERS CLUB</p>
-            <p class="text-[40px] font-normal">JOIN THE COLLECTORS CLUB TO PURCHASE</p>
-        </div>
-        <!--TODO: Change from Sign Up to view User Profile when logged in. -->
-        <a href="signup.php"><button class="mt-[400px] mx-auto bg-white text-black px-8 py-5">SIGN UP</button></a>
+        
+        <?php
+            if(isset($_SESSION['user_id']) && $_SESSION['user_id']){
+                echo '<div class="flex flex-col">
+                    <p class="text-[128px] italic font-bold">MEMBERS CLUB</p>
+                    <p class="text-[40px] font-normal">WELCOME '. strtoupper($_SESSION['user_fname']) .', READY TO EXPLORE OUR NEW COLLECTION?</p>
+                </div>';
+                echo '<a href="orders.php"><button class="mt-[400px] mx-auto bg-white text-black px-8 py-5">MY ORDERS</button></a>';
+            }
+            else{
+                echo '<div class="flex flex-col">
+                    <p class="text-[128px] italic font-bold">MEMBERS CLUB</p>
+                    <p class="text-[40px] font-normal">JOIN THE COLLECTORS CLUB TO PURCHASE</p>
+                </div>';
+                echo '<a href="signup.php"><button class="mt-[400px] mx-auto bg-white text-black px-8 py-5">SIGN UP</button></a>';
+            }
+        ?>
+        
     </div>
 
 

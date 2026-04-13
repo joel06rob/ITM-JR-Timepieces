@@ -94,7 +94,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <div class="flex items-center gap-6">
         <!-- Navigation Links -->
         <ul class="flex gap-10 bg-gradient-to-r from-[#242424] to-[#2D2D2D] p-4 px-11 rounded-[35px] font-medium text-white shadow-[0_1px_5px_rgba(0,0,0,0.25)] items-center">
-          <li><a href="watchfinder.php" class="hover:text-gray-300 transition-colors duration-200">Watches</a></li>
+          <li><a href="index.php" class="hover:text-gray-300 transition-colors duration-200">Watches</a></li>
           <li><a href="orders.php" class="hover:text-gray-300 transition-colors duration-200">My Orders</a></li>
           <li><a href="basket.php" class="hover:text-gray-300 transition-colors duration-200">Basket</a></li>
           
