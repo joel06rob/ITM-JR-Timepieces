@@ -112,13 +112,19 @@ require_once "init.php";
       </select>
   </form>";
     echo "<div class='py-10'>
-          <div class='px-8 py-4 bg-gray-800'>
-            <ul class='flex list-none justify-between text-white'>
-              <li>Order ID
-              <li>Customer ID
-              <li>Order Date
-              <li>Status
-            </ul>
+          <div class='flex gap-32 px-4 py-4 bg-[#242424] text-white text-sm'>
+            <div class='flex gap-3'>
+              <p>Order ID</p>
+              <p>Customer ID</p>
+              <p>Order Date</p>
+            </div>
+            <div>
+              <p>Status</p>
+            </div>
+            <div class='pl-28'>
+              <p>Order Total</p>
+            </div>
+
           </div>
           <div class='flex flex-col gap-1'>
           ";
@@ -142,8 +148,8 @@ require_once "init.php";
         $statusClass = "bg-gray-500 text-white";
       }
 
-      echo "<div class='flex items-center bg-white gap-4 py-4 px-8 border'>   
-                        <div class='flex-1 flex items-center gap-4'>          
+      echo "<div class='flex items-center bg-white gap-12 py-4 px-8 border'>   
+                        <div class='flex-1 flex items-center gap-12'>          
                           <p>{$order['ID']}</p>
                           <p>{$order['CustomerID']}</p>
                           <p class='pl-2 text-xs'>{$order['OrderDate']}</p>
@@ -173,6 +179,9 @@ require_once "init.php";
                           </select>
                           <input type='hidden' name='update_status' value='1'>
                           </form>
+                        </div>
+                        <div class='flex-1'>
+                          <p class='pl-2 text-xs'>£{$order['OrderTotal']}</p>
                         </div>
                         <div class='flex-1 flex justify-end'>
                         ";

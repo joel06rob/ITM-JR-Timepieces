@@ -17,10 +17,10 @@ class Admin {
     public function getAllOrders($filter = null){
         
         if($filter !== null && $filter !== ''){
-            $sql = "SELECT * FROM Orders WHERE Status = '$filter'";
+            $sql = "SELECT o.*, SUM(oi.PriceAtPurchase * oi.Quantity) AS OrderTotal FROM Orders o JOIN Orders_Items oi ON o.ID = oi.OrderID WHERE o.Status = '$filter' GROUP BY o.ID ORDER BY o.OrderDate DESC";
         }
         else{
-            $sql = "SELECT * FROM Orders";
+            $sql = "SELECT o.*, SUM(oi.PriceAtPurchase * oi.Quantity) AS OrderTotal FROM Orders o JOIN Orders_Items oi ON o.ID = oi.OrderID GROUP BY o.ID ORDER BY o.OrderDate DESC";
         }
         
         $result = mysqli_query($this->conn, $sql);
