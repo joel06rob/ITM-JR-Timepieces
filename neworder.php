@@ -84,9 +84,33 @@ $errors = $_GET['error'] ?? '';
 
         ?>
 
-        <!--TODO: Pre-populate fields with logged in user info.-->
         <!--  Order details form, using POST for security  -->
-        <form class="my-8 grid grid-cols-2 grid-rows-7 gap-4" action="invoice.php" method="POST">
+        <?php 
+        $auth = new Auth($conn);
+
+        //Auto fill details in form if user is logged in.
+        if($auth->checkUser()){
+            echo '
+            <form class="my-8 grid grid-cols-2 grid-rows-7 gap-4" action="invoice.php" method="POST">
+            <span><strong>Details</strong></span><span></span>
+            Name: <input type="text" name="name" class="border-b-[1px] border-gray-600 focus:outline-none" value="'. $_SESSION['user_fname'] . " " . $_SESSION['user_sname'] .'" required>
+            E-mail: <input type="text" name="email" class="border-b-[1px] border-gray-600 focus:outline-none" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" value="' . $_SESSION['user_email'] . '" required>
+            Phone Number: <input type="text" name="phone" class="border-b-[1px] border-gray-600 focus:outline-none" pattern="^\+?[0-9]{1,4}?[\s.-]?\(?[0-9]{1,4}?\)?[\s.-]?[0-9\s.-]{5,15}$" required>
+            <span><strong>Address</strong></span><span></span>
+            1st Line Address: <input type="text" name="firstaddress" class="border-b-[1px] border-gray-600 focus:outline-none" required>
+            2nd Line Address: <input type="text" name="secondaddress" class="border-b-[1px] border-gray-600 focus:outline-none" required>
+            Town/City: <input type="text" name="towncity" class="border-b-[1px] border-gray-600 focus:outline-none" required>
+            Postcode: <input type="text" name="postcode" class="border-b-[1px] border-gray-600 focus:outline-none" pattern="^[A-Za-z0-9\s-]{4,10}$" required>
+            <span><strong>Payment</strong></span><span></span>
+            Name on card: <input type="text" name="namecard" class="border-b-[1px] border-gray-600 focus:outline-none" required>
+            Card Number: <input type="text" name="numbercard" class="border-b-[1px] border-gray-600 focus:outline-none" pattern="^[0-9 ]{13,19}$" inputmode="numeric" required>
+            CVC: <input type="text" name="cvccard" class="border-b-[1px] border-gray-600 focus:outline-none" pattern="^[0-9]{3,4}$" inputmode="numeric" required>
+            <div class="col-span-2 flex justify-end mt-4"><input type="submit" value="Confirm & Pay" class="inline-block bg-gray-800 text-white px-4 py-2 rounded-lg hover:cursor-pointer hover:bg-gray-900 transition" required></div>
+        </form>';
+        }
+        else{ 
+            echo '
+            <form class="my-8 grid grid-cols-2 grid-rows-7 gap-4" action="invoice.php" method="POST">
             <span><strong>Details</strong></span><span></span>
             Name: <input type="text" name="name" class="border-b-[1px] border-gray-600 focus:outline-none" required>
             E-mail: <input type="text" name="email" class="border-b-[1px] border-gray-600 focus:outline-none" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" required>
@@ -101,7 +125,10 @@ $errors = $_GET['error'] ?? '';
             Card Number: <input type="text" name="numbercard" class="border-b-[1px] border-gray-600 focus:outline-none" pattern="^[0-9 ]{13,19}$" inputmode="numeric" required>
             CVC: <input type="text" name="cvccard" class="border-b-[1px] border-gray-600 focus:outline-none" pattern="^[0-9]{3,4}$" inputmode="numeric" required>
             <div class="col-span-2 flex justify-end mt-4"><input type="submit" value="Confirm & Pay" class="inline-block bg-gray-800 text-white px-4 py-2 rounded-lg hover:cursor-pointer hover:bg-gray-900 transition" required></div>
-        </form>
+        </form>';
+        }
+        ?>
+        
         <a href='basket.php' class='text-gray-800 inline-block'>← Back to Cart</a>
         
     </body>
