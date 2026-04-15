@@ -123,6 +123,28 @@ class Admin {
         }
         return $data;
     }
+
+    //admin_inventory.php
+    //
+    public function getProductsStock(){
+        $sql = "SELECT * FROM Product";
+        $stmt = mysqli_stmt_init($this->conn);
+            if(!mysqli_stmt_prepare($stmt, $sql)){
+                echo "ERROR: SQL STMT FAILED";
+                return;
+            }
+        mysqli_stmt_execute($stmt);
+
+        //Get the results and input into array to return
+        $result = mysqli_stmt_get_result($stmt);
+        $products= array();
+        foreach($result as $row){
+            $products[] = $row;
+        }
+
+        return $products;
+    }
+
 }
 
 ?>

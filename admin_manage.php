@@ -73,6 +73,7 @@ require_once "init.php";
   <div class="flex">
     <a class="py-3 px-6 text-black bg-white rounded-[35px]" href="admin_manage.php">Manage</a>
     <a class="py-3 px-6 text-white" href="admin_dash.php">Dashboard</a>
+    <a class="py-3 px-6 text-white" href="admin_inventory.php">Inventory</a>
 </div>
   <?php 
   
