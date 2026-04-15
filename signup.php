@@ -24,6 +24,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   if(!($password == $passwordre)){
     $signup_errors[] = "<p class='text-red-600'>Please ensure your password matches the re-entered password.</p>";
   }
+  if(strlen($password) < 8 || !preg_match('~[0-9]+~', $password)){
+    $signup_errors[] = "<p class='text-red-600'>Please enter a valid password (ensure more than 8 characters and contains a number</p>";
+  }
   if(preg_match('/\d/', $fname) || preg_match('/\d/', $sname)){
     $signup_errors[] = "<p class='text-red-600'>Please enter a valid name.</p>";
   }
