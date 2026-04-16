@@ -20,6 +20,13 @@ class Cart{
         }
     }
 
+    public function removeFromCart($productId){
+    if(isset($_SESSION['cart'][$productId])){
+        unset($_SESSION['cart'][$productId]);
+        }   
+    }
+
+
 
 }
 

@@ -56,6 +56,13 @@ if(!$cart->getCart()){
                             <p class='text-sm font-light'>{$quantity}</p>
                         </div>
                     </div>
+                    <form method='POST' action='remove_from_basket.php'>
+                        <input type='hidden' name='product_id' value='{$product_id}'>
+                        <button type='submit' 
+                            class='text-red-500 hover:text-red-700 font-semibold'>
+                            ✖
+                        </button>
+                    </form>
                 </div>
                 ";
         }
