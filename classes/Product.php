@@ -45,6 +45,17 @@ class Product {
         return $result;
     }
 
+    public function updateStock($product_id){
+        $sql = "UPDATE Product SET Stock = Stock - 1 WHERE ID = ?";
+        $stmt = mysqli_stmt_init($this->conn);
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            echo "ERROR: SQL STMT FAILED";
+            return;
+        }
+        mysqli_stmt_bind_param($stmt, "i", $product_id);
+        mysqli_stmt_execute($stmt);
+    }
+
 }
 
 

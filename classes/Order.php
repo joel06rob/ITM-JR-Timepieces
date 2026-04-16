@@ -37,6 +37,9 @@ class Order {
         $sql = "SELECT ID, Price FROM Product WHERE ID IN ($product_ids)";
         $result = mysqli_query($this->conn, $sql);
 
+        //Update stock
+        $product = new Product($this->conn);
+
         //Loop through all products in Cart
         while($row = mysqli_fetch_assoc($result)){
             $product_id = $row['ID'];
@@ -53,6 +56,9 @@ class Order {
             
             mysqli_stmt_bind_param($stmt, "iiid", $product_id, $order_id, $quantity, $price);
             mysqli_stmt_execute($stmt);
+
+            //Update stock for each item
+            $product->updateStock($product_id);
         }
         
         return $order_id;
