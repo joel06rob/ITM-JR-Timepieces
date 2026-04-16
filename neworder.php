@@ -7,6 +7,12 @@ if(!isset($_SESSION['cart']) || empty($_SESSION['cart'])){
     exit;
 }
 
+//If user isn't logged in, prompt them to log in
+if(!$auth->checkUser()){
+    header("Location: login.php");
+    exit;
+}
+
 //Errors - Get invalid entry errors
 $errors = $_GET['error'] ?? '';
 
