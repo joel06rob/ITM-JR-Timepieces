@@ -34,8 +34,10 @@
 
             <?php if($auth->checkUser()): ?>
 
-                <a href="" class="block px-4 py-2 rounded-lg hover:bg-gray-100">Profile</a>
-                <a href="" class="block px-4 py-2 rounded-lg hover:bg-gray-100">Settings</a>
+                <?php if($auth->checkAdmin()): ?>
+                    <a href="admin_manage.php" class="block px-4 py-2 rounded-lg hover:bg-gray-100">Manage (Admin)</a>
+                <?php endif; ?>
+                <a href="orders.php" class="block px-4 py-2 rounded-lg hover:bg-gray-100">Orders</a>
                 <a href="logout.php" class="block px-4 py-2 rounded-lg hover:bg-gray-100">Logout</a>
 
             <?php else: ?>
