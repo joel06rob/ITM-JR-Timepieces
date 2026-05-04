@@ -84,18 +84,18 @@
     <div class="flex flex-col items-center gap-2">
       
       <div class="flex gap-2">
-        <div class="text-center p-12 bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px]">
+        <div class="text-center p-16 bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px]">
           <p id="totalRevenue" class="text-white text-8xl font-medium"></p>
           <p class="text-3xl text-white">Revenue</p>
         </div>
-        <div class="text-center p-12 bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px]">
+        <div class="text-center p-16 bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px]">
           <p id="totalRevenue30D" class="text-white text-8xl font-medium"></p>
           <p class="text-3xl text-white">Revenue(Month)</p>
         </div>
       </div>
       
       <div class="bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px] p-20">
-        <canvas id="totalRevenueByDate" class="min-w-[600px]"></canvas>
+        <canvas id="totalRevenueByDate" class="min-w-[1050px]"></canvas>
       </div>
 
     </div>
@@ -105,14 +105,14 @@
     <div class="flex flex-col items-center gap-2">
       
       
-      <div class="text-center p-12 bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px]">
+      <div class="text-center p-16 bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px]">
         <p id="mostPopular" class="text-white text-8xl font-medium"></p>
         <p class="text-3xl text-white">Most Ordered Item</p>
       </div>
 
       
       <div class="bg-gradient-to-r from-[#242424] to-[#2D2D2D] rounded-[50px] p-20">
-        <canvas id="productOrders" class="min-w-[600px]"></canvas>
+        <canvas id="productOrders" class="min-w-[900px]"></canvas>
       </div>
 
     </div>

@@ -60,6 +60,7 @@ class Admin {
 
     //admin_data_dash.php
     //
+    //All methods for returning set data reports from db
     public function countAllOrders(){
         $sql = "SELECT COUNT(*) AS TotalOrders FROM Orders";
         $result = mysqli_query($this->conn, $sql);

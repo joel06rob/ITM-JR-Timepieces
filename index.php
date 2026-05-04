@@ -4,7 +4,7 @@
 ?>
 
 <!DOCTYPE html>
-<html>
+<html class="scroll-smooth">
 <head>
     <title>Watch Shop</title>
     <!-- Tailwind CDN -->
@@ -83,14 +83,14 @@
                     <p class="text-[128px] italic font-bold">MEMBERS CLUB</p>
                     <p class="text-[40px] font-normal">WELCOME '. strtoupper($_SESSION['user_fname']) .', READY TO EXPLORE OUR NEW COLLECTION?</p>
                 </div>';
-                echo '<a href="orders.php"><button class="mt-[400px] mx-auto bg-white text-black px-8 py-5">MY ORDERS</button></a>';
+                echo '<a href="orders.php"><button class="mt-[400px] mx-auto bg-white text-black px-8 py-5 hover:bg-gray-300 transition-colors duration-300">MY ORDERS</button></a>';
             }
             else{
                 echo '<div class="flex flex-col">
                     <p class="text-[128px] italic font-bold">MEMBERS CLUB</p>
                     <p class="text-[40px] font-normal">JOIN THE COLLECTORS CLUB TO PURCHASE</p>
                 </div>';
-                echo '<a href="signup.php"><button class="mt-[400px] mx-auto bg-white text-black px-8 py-5">SIGN UP</button></a>';
+                echo '<a href="signup.php"><button class="mt-[400px] mx-auto bg-white text-black px-8 py-5 hover:bg-gray-300 transition-colors duration-300">SIGN UP</button></a>';
             }
         ?>
         
@@ -103,7 +103,7 @@
 <div id="products" class="max-w-7xl mx-auto py-20 pb-28 px-4">
 
     <h2 class="text-3xl font-bold mb-5 text-center text-white">Our Collection</h2>
-    <h3 class="text-2xl font-regular mb-20 text-center text-[#BFB578]">Explore our finest timepieces</h3>
+    <h3 class="text-2xl font-[50] mb-20 text-center text-white">Explore our finest timepieces</h3>
 
     <!--PRODUCTS GRID-->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -160,8 +160,7 @@
 
     </div>
     <div class="flex justify-center mt-10">
-        <!--TODO: Create Watch Finder Search -->
-        <button class="justify-center bg-white text-black px-8 py-5"><a href="watchfinder.php">FIND WATCH</a></button>
+        <a href="watchfinder.php" class="justify-center bg-white text-black px-8 py-5 hover:bg-gray-300 transition-colors duration-300">FIND WATCH</a>
     </div>
 </div>
 

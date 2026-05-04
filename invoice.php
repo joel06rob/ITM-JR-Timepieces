@@ -133,6 +133,7 @@ $order_id = $order->createOrder($_SESSION['user_id'], $_SESSION['cart']);
                 </div>
 
                 <a href='index.php' class='inline-block bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition'>Continue</a>
+                <a href='orders.php' class='inline-block bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition'>Track Order</a>
             ";
             
             //Clear cart and total variables:
